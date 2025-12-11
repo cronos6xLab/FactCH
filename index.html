@@ -15,27 +15,22 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     .contenedor {
-      max-width: 900px; /* ajusta si quieres más grande o más chico */
-      width: 100%;
+      /* sin max-width ni width para respetar tamaño real de la imagen */
     }
     img {
-      width: 100%;
-      height: auto;
       display: block;
+      /* sin width:100% para que las coords coincidan con píxeles reales */
     }
   </style>
 </head>
 <body>
-  <!-- Mapa de la imagen -->
   <map name="mapa-facturacion">
-    <!-- BOTÓN CON TUS COORDS Y URL REAL -->
     <area shape="rect"
           coords="134,645,316,698"
           href="https://factura.foodbot.ai/fa.html"
           alt="Ir al portal de facturación">
   </map>
 
-  <!-- Imagen principal con el mapa aplicado -->
   <div class="contenedor">
     <img src="https://i.postimg.cc/yxHQRKXX/LANDING-PAGE.png"
          usemap="#mapa-facturacion"
@@ -43,5 +38,3 @@
   </div>
 </body>
 </html>
-
-
