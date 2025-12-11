@@ -4,29 +4,29 @@
   <meta charset="UTF-8">
   <title>Portal de Facturación</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
 
-    .contenedor {
-      max-width: 100%;
-    }
+  .contenedor {
+    width: 100vw;      /* usar todo el ancho de la ventana */
+    max-width: 480px;  /* límite opcional para no explotar en pantallas enormes */
+  }
 
-    /* Imagen responsiva que conserva proporción */
-    img[usemap] {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      border: 0;
-    }
-  </style>
+  img[usemap] {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 0;
+  }
+</style>
 </head>
 <body>
   <!-- Mapa de la imagen -->
