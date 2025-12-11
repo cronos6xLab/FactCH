@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Imagen interactiva AION</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #111;
+    }
+    .contenedor {
+      max-width: 600px;
+      width: 100%;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Mapa de la imagen -->
+  <map name="mapa-aion">
+    <!-- EJEMPLO: rectángulo clicable -->
+    <!-- coords: x1,y1,x2,y2 en píxeles sobre la imagen original -->
+    <area shape="rect"
+          coords="50,50,250,200"
+          href="https://tusitio.com/tu-enlace"
+          alt="Ver más de este perfume">
+  </map>
+
+  <!-- Imagen principal con el mapa aplicado -->
+  <div class="contenedor">
+    <img src="https://TU-URL-DE-IMAGEN.jpg"
+         usemap="#mapa-aion"
+         alt="Imagen interactiva AION">
+  </div>
+</body>
+</html>
