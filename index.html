@@ -3,43 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <title>Portal de Facturación</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    background: #000;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    /* sin flex, sin centrar */
-  }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-  .wrapper {
-    transform: scale(2.1);      /* tu 2.3 */
-    transform-origin: top left; /* que crezca desde arriba-izquierda */
-  }
+    .contenedor {
+      max-width: 100%;
+    }
 
-  .contenedor {
-    /* sin max-width ni width */
-  }
-
-  img {
-    display: block;
-  }
-</style>
+    /* Imagen responsiva que conserva proporción */
+    img[usemap] {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border: 0;
+    }
+  </style>
 </head>
 <body>
+  <!-- Mapa de la imagen -->
   <map name="mapa-facturacion">
+    <!-- BOTÓN CON TUS COORDS ORIGINALES -->
     <area shape="rect"
           coords="134,645,316,698"
           href="https://factura.foodbot.ai/fa.html"
           alt="Ir al portal de facturación">
   </map>
 
-  <div class="wrapper">
-    <div class="contenedor">
-      <img src="https://i.postimg.cc/yxHQRKXX/LANDING-PAGE.png"
-           usemap="#mapa-facturacion"
-           alt="Landing de facturación">
-    </div>
+  <!-- Imagen principal responsiva -->
+  <div class="contenedor">
+    <img src="https://i.postimg.cc/yxHQRKXX/LANDING-PAGE.png"
+         usemap="#mapa-facturacion"
+         alt="Landing de facturación">
   </div>
+
+  <!-- Librería para hacer el mapa responsivo -->
+  <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
+
+  <script>
+    // Cuando cargue la página, hacer responsivo el mapa
+    window.addEventListener('load', function () {
+      if (typeof imageMapResize === 'function') {
+        imageMapResize();
+      }
+    });
+  </script>
 </body>
 </html>
