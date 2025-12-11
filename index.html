@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Imagen interactiva AION</title>
+  <title>Portal de Facturación</title>
   <style>
     body {
       margin: 0;
@@ -11,10 +11,11 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background: #111;
+      background: #000;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     .contenedor {
-      max-width: 600px;
+      max-width: 900px; /* ajusta si quieres más grande o más chico */
       width: 100%;
     }
     img {
@@ -26,20 +27,21 @@
 </head>
 <body>
   <!-- Mapa de la imagen -->
-  <map name="mapa-aion">
-    <!-- EJEMPLO: rectángulo clicable -->
-    <!-- coords: x1,y1,x2,y2 en píxeles sobre la imagen original -->
+  <map name="mapa-facturacion">
+    <!-- BOTÓN PRINCIPAL DE FACTURACIÓN -->
+    <!-- Reemplaza la URL de abajo por tu URL real de portal de facturación -->
     <area shape="rect"
-          coords="50,50,250,200"
-          href="https://tusitio.com/tu-enlace"
-          alt="Ver más de este perfume">
+          coords="150,820,950,960"
+          href="https://factura.foodbot.ai/fa.html"
+          alt="Ir al portal de facturación">
   </map>
 
   <!-- Imagen principal con el mapa aplicado -->
   <div class="contenedor">
-    <img src="https://TU-URL-DE-IMAGEN.jpg"
-         usemap="#mapa-aion"
-         alt="Imagen interactiva AION">
+    <img src="https://i.postimg.cc/yxHQRKXX/LANDING-PAGE.png"
+         usemap="#mapa-facturacion"
+         alt="Landing de facturación">
   </div>
 </body>
 </html>
+
