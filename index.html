@@ -27,7 +27,6 @@
       border: 0;
     }
 
-    /* Overlay rojo para ver el área */
     .debug-overlay {
       position: absolute;
       background-color: rgba(255, 0, 0, 0.4);
@@ -41,7 +40,7 @@
 
   <map name="mapa-facturacion">
     <area shape="rect"
-          coords="500,1800,900,2000"
+          coords="300,1200,700,1400"
           href="https://factura.foodbot.ai/fa.html"
           alt="Ir al portal de facturación"
           title="Ir al portal de facturación">
@@ -53,11 +52,8 @@
          alt="Landing de facturación">
   </div>
 
-  <!-- SIN imageMapResizer - por ahora para debug -->
-
   <script>
     window.addEventListener('load', function () {
-      // Solo mostrar el área como rectángulo rojo
       const areas = document.querySelectorAll('area');
       const contenedor = document.querySelector('.contenedor');
 
