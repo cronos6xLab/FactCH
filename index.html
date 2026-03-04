@@ -27,12 +27,20 @@
       border: 0;
     }
 
-    .debug-overlay {
+    /* Efecto hover verde (original que querías) */
+    .efecto-hover {
       position: absolute;
-      background-color: rgba(255, 0, 0, 0.4);
-      border: 3px solid red;
+      border: 2px solid #4CAF50;
+      background-color: rgba(76, 175, 80, 0.3);
+      border-radius: 8px;
       pointer-events: none;
-      z-index: 20;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+      z-index: 10;
+    }
+
+    .efecto-hover.activo {
+      opacity: 1;
     }
   </style>
 </head>
@@ -52,26 +60,41 @@
          alt="Landing de facturación">
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
+
   <script>
     window.addEventListener('load', function () {
+      // 1. Inicializar mapa responsive
+      if (typeof imageMapResize === 'function') {
+        imageMapResize();
+      }
+
+      // 2. Efecto hover verde
+      const recuadro = document.createElement('div');
+      recuadro.className = 'efecto-hover';
+      document.querySelector('.contenedor').appendChild(recuadro);
+
       const areas = document.querySelectorAll('area');
-      const contenedor = document.querySelector('.contenedor');
 
       areas.forEach(area => {
-        const coords = area.getAttribute('coords').split(',');
-        const x1 = parseInt(coords[0], 10);
-        const y1 = parseInt(coords[1], 10);
-        const x2 = parseInt(coords[2], 10);
-        const y2 = parseInt(coords[3], 10);
+        area.addEventListener('mouseenter', function() {
+          const coords = this.getAttribute('coords').split(',');
+          const x1 = parseInt(coords[0], 10);
+          const y1 = parseInt(coords[1], 10);
+          const x2 = parseInt(coords[2], 10);
+          const y2 = parseInt(coords[3], 10);
 
-        const overlay = document.createElement('div');
-        overlay.className = 'debug-overlay';
-        overlay.style.left  = x1 + 'px';
-        overlay.style.top   = y1 + 'px';
-        overlay.style.width = (x2 - x1) + 'px';
-        overlay.style.height = (y2 - y1) + 'px';
+          recuadro.style.left = x1 + 'px';
+          recuadro.style.top = y1 + 'px';
+          recuadro.style.width = (x2 - x1) + 'px';
+          recuadro.style.height = (y2 - y1) + 'px';
+          
+          recuadro.classList.add('activo');
+        });
 
-        contenedor.appendChild(overlay);
+        area.addEventListener('mouseleave', function() {
+          recuadro.classList.remove('activo');
+        });
       });
     });
   </script>
