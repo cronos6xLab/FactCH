@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal de Facturación</title>
   <style>
     html, body {
@@ -13,93 +14,57 @@
       height: 100%;
     }
 
-    body {
-      /* sin flex ni centrado para evitar espacios negros mal ubicados */
-    }
-
     .contenedor {
-      width: 100vw;
+      position: relative; /* necesario para que el botón se posicione sobre la imagen */
+      width: 100%;
       margin: 0;
+      line-height: 0; /* evita espacio extra debajo de la imagen */
     }
 
-    img[usemap] {
+    .contenedor img {
       width: 100%;
       height: auto;
       display: block;
       border: 0;
     }
 
-    /* Efecto hover verde */
-    .efecto-hover {
+    /* Botón invisible posicionado sobre la imagen */
+    .btn-overlay {
       position: absolute;
-      border: 2px solid #4CAF50;
-      background-color: rgba(76, 175, 80, 0.3);
+      /* Ajusta estos % según dónde esté el botón en tu imagen */
+      /* left/width = coordenadas X / ancho original de imagen */
+      /* top/height = coordenadas Y / alto original de imagen  */
+      left: 12.5%;    /* 100 / 800 */
+      top: 86.7%;     /* 1300 / 1500 */
+      width: 75%;     /* (700-100) / 800 */
+      height: 6.7%;   /* (1400-1300) / 1500 */
+      cursor: pointer;
+      text-decoration: none;
       border-radius: 8px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s ease-in-out;
+      border: 2px solid transparent;
+      background: transparent;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      display: block;
       z-index: 10;
     }
 
-    .efecto-hover.activo {
-      opacity: 1;
+    .btn-overlay:hover {
+      background: rgba(76, 175, 80, 0.3);
+      border-color: #4CAF50;
     }
   </style>
 </head>
 <body>
 
-  <!-- Mapa con TUS coordenadas perfeccionadas -->
-  <map name="mapa-facturacion">
-    <area shape="rect"
-          coords="100,1300,700,1400"
-          href="https://factura.foodbot.ai/fa.html"
-          alt="Ir al portal de facturación">
-  </map>
-
   <div class="contenedor">
-    <!-- TU IMAGEN REMOTA -->
     <img src="https://i.ibb.co/BVmzFtz5/IMG-5262.png"
-         usemap="#mapa-facturacion"
          alt="Landing de facturación">
+
+    <!-- Botón overlay posicionado con % sobre la imagen -->
+    <a class="btn-overlay"
+       href="https://factura.foodbot.ai/fa.html"
+       aria-label="Ir al portal de facturación"></a>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
-
-  <script>
-    window.addEventListener('load', function () {
-      // 1. Responsivo
-      if (typeof imageMapResize === 'function') {
-        imageMapResize();
-      }
-
-      // 2. Efecto verde
-      const recuadro = document.createElement('div');
-      recuadro.className = 'efecto-hover';
-      document.querySelector('.contenedor').appendChild(recuadro);
-
-      const areas = document.querySelectorAll('area');
-
-      areas.forEach(area => {
-        area.addEventListener('mouseenter', function() {
-          const coords = this.coords.split(',');
-          const x1 = parseInt(coords[0], 10);
-          const y1 = parseInt(coords[1], 10);
-          const x2 = parseInt(coords[2], 10);
-          const y2 = parseInt(coords[3], 10);
-
-          recuadro.style.left = x1 + 'px';
-          recuadro.style.top = y1 + 'px';
-          recuadro.style.width = (x2 - x1) + 'px';
-          recuadro.style.height = (y2 - y1) + 'px';
-          
-          recuadro.classList.add('activo');
-        });
-
-        area.addEventListener('mouseleave', function() {
-          recuadro.classList.remove('activo');
-        });
-      });
-    });
-  </script>
 </body>
 </html>
