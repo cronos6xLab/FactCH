@@ -27,11 +27,11 @@
       border: 0;
     }
 
-    /* Overlay de color para ver el área (debug) */
+    /* Overlay rojo para ver el área */
     .debug-overlay {
       position: absolute;
-      background-color: rgba(255, 0, 0, 0.3);
-      border: 2px solid red;
+      background-color: rgba(255, 0, 0, 0.4);
+      border: 3px solid red;
       pointer-events: none;
       z-index: 20;
     }
@@ -39,32 +39,25 @@
 </head>
 <body>
 
-  <!-- Mapa corregido para el botón "Factura" -->
   <map name="mapa-facturacion">
     <area shape="rect"
-          coords="500,2200,900,2400"
+          coords="500,1800,900,2000"
           href="https://factura.foodbot.ai/fa.html"
           alt="Ir al portal de facturación"
           title="Ir al portal de facturación">
   </map>
 
   <div class="contenedor">
-    <!-- TU IMAGEN REMOTA SIEMPRE VISIBLE -->
     <img src="https://i.ibb.co/BVmzFtz5/IMG-5262.png"
          usemap="#mapa-facturacion"
          alt="Landing de facturación">
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
+  <!-- SIN imageMapResizer - por ahora para debug -->
 
   <script>
     window.addEventListener('load', function () {
-      // 1. Hacer el mapa responsive
-      if (typeof imageMapResize === 'function') {
-        imageMapResize();
-      }
-
-      // 2. Mostrar el área como rectángulo rojo
+      // Solo mostrar el área como rectángulo rojo
       const areas = document.querySelectorAll('area');
       const contenedor = document.querySelector('.contenedor');
 
