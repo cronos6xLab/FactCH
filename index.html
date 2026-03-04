@@ -46,33 +46,30 @@
 </head>
 <body>
 
-  <!-- Mapa generado por image-map.net -->
-  <map name="image-map">
+  <!-- Mapa ajustado para tu imagen remota (ajusta coords según lo que te diga image-map.net sobre IMG_5262.png) -->
+  <map name="mapa-facturacion">
     <area shape="rect"
-          coords="127,1314,724,1426"
+          coords="127,1314,724,1426"  <!-- cambia estas coords si hiciste el mapa sobre IMG_5260.jpeg -->
           href="https://factura.foodbot.ai/fa.html"
           alt="Ir al portal de facturación"
           title="Ir al portal de facturación">
   </map>
 
   <div class="contenedor">
-    <!-- Asegúrate de que esta sea la misma imagen en dimensiones que usaste en image-map.net -->
-    <img src="IMG_5260.jpeg"
-         usemap="#image-map"
+    <!-- Tu imagen visible en el navegador -->
+    <img src="https://i.ibb.co/BVmzFtz5/IMG-5262.png"
+         usemap="#mapa-facturacion"
          alt="Landing de facturación">
   </div>
 
-  <!-- Script para hacer el mapa responsive -->
   <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
 
   <script>
     window.addEventListener('load', function () {
-      // 1. Inicializar mapa responsivo
       if (typeof imageMapResize === 'function') {
         imageMapResize();
       }
 
-      // 2. Efecto visual (recuadro)
       const recuadro = document.createElement('div');
       recuadro.className = 'efecto-hover';
       document.querySelector('.contenedor').appendChild(recuadro);
