@@ -3,46 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <title>Portal de Facturación</title>
- <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: #000;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    width: 100%;
-    height: 100%;
-  }
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      width: 100%;
+      height: 100%;
+    }
 
-  body {
-    /* sin flex, sin centrado */
-  }
+    body {
+      /* sin flex ni centrado para evitar espacios negros mal ubicados */
+    }
 
-  .contenedor {
-    width: 100vw;   /* exactamente el ancho de la ventana */
-    margin: 0;      /* pegado al borde izquierdo */
-  }
+    .contenedor {
+      width: 100vw;   /* ocupa todo el ancho de la pantalla */
+      margin: 0;
+    }
 
-  img[usemap] {
-    width: 100vw;   /* la imagen rellena todo el ancho de pantalla */
-    height: auto;
-    display: block;
-    border: 0;
-  }
-</style>
+    /* Imagen responsiva que conserva proporción */
+    img[usemap] {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 0;
+    }
+  </style>
 </head>
 <body>
-  <!-- Mapa de la imagen -->
+  <!-- Mapa de la imagen con tus nuevas coordenadas -->
   <map name="mapa-facturacion">
-    <!-- BOTÓN CON TUS COORDS ORIGINALES -->
+    <!-- BOTÓN CON TUS NUEVAS COORDS -->
     <area shape="rect"
-          coords="721,1425,123,1315" 
+          coords="721,1425,123,1315"
           href="https://factura.foodbot.ai/fa.html"
           alt="Ir al portal de facturación">
   </map>
 
   <!-- Imagen principal responsiva -->
   <div class="contenedor">
-    <img src="https://i.ibb.co/BVmzFtz5/IMG-5262.png"
+    <img src="IMG_5260.jpeg"
          usemap="#mapa-facturacion"
          alt="Landing de facturación">
   </div>
