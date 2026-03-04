@@ -27,20 +27,20 @@
       border: 0;
     }
 
-    /* Efecto de debug: rectángulo rojo encima del área */
+    /* Overlay de color para ver el área (debug) */
     .debug-overlay {
       position: absolute;
-      background-color: rgba(255, 0, 0, 0.3);   /* rojo semitransparente */
+      background-color: rgba(255, 0, 0, 0.3);
       border: 2px solid red;
-      pointer-events: none; /* para que el clic siga pasando por el área del mapa */
+      pointer-events: none;
       z-index: 20;
     }
   </style>
 </head>
 <body>
 
-  <!-- Mapa generado por image-map.net -->
-  <map name="image-map">
+  <!-- Mapa que usa tu imagen remota -->
+  <map name="mapa-facturacion">
     <area shape="rect"
           coords="127,1314,724,1426"
           href="https://factura.foodbot.ai/fa.html"
@@ -49,21 +49,23 @@
   </map>
 
   <div class="contenedor">
-    <img src="IMG_5260.jpeg"
-         usemap="#image-map"
+    <!-- IMAGEN REMOTA FIJA (nunca la quito de aquí) -->
+    <img src="https://i.ibb.co/BVmzFtz5/IMG-5262.png"
+         usemap="#mapa-facturacion"
          alt="Landing de facturación">
   </div>
 
+  <!-- Script para que el mapa se adapte y el área siga funcionando -->
   <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
 
   <script>
     window.addEventListener('load', function () {
-      // 1. Inicializar mapa responsivo
+      // 1. Hacer el mapa responsive
       if (typeof imageMapResize === 'function') {
         imageMapResize();
       }
 
-      // 2. Añadir un overlay de color encima del área para ver dónde está
+      // 2. Añadir un rectángulo de color encima del área para verla
       const areas = document.querySelectorAll('area');
       const contenedor = document.querySelector('.contenedor');
 
