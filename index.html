@@ -39,23 +39,22 @@
 </head>
 <body>
 
-  <!-- Mapa que usa tu imagen remota -->
+  <!-- Mapa corregido para el botón "Factura" -->
   <map name="mapa-facturacion">
     <area shape="rect"
-          coords="127,1314,724,1426"
+          coords="500,2200,900,2400"
           href="https://factura.foodbot.ai/fa.html"
           alt="Ir al portal de facturación"
           title="Ir al portal de facturación">
   </map>
 
   <div class="contenedor">
-    <!-- IMAGEN REMOTA FIJA (nunca la quito de aquí) -->
+    <!-- TU IMAGEN REMOTA SIEMPRE VISIBLE -->
     <img src="https://i.ibb.co/BVmzFtz5/IMG-5262.png"
          usemap="#mapa-facturacion"
          alt="Landing de facturación">
   </div>
 
-  <!-- Script para que el mapa se adapte y el área siga funcionando -->
   <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
 
   <script>
@@ -65,7 +64,7 @@
         imageMapResize();
       }
 
-      // 2. Añadir un rectángulo de color encima del área para verla
+      // 2. Mostrar el área como rectángulo rojo
       const areas = document.querySelectorAll('area');
       const contenedor = document.querySelector('.contenedor');
 
