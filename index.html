@@ -27,7 +27,6 @@
       border: 0;
     }
 
-    /* Efecto verde al pasar el ratón */
     .efecto-hover {
       position: absolute;
       border: 2px solid #4CAF50;
@@ -60,20 +59,47 @@
          alt="Landing de facturación">
   </div>
 
-  <!-- SIN imageMapResizer = clics 100% funcionales -->
-
   <script>
+    // Coordenadas originales de la imagen completa (2160x3840)
+    const originalWidth = 2160;
+    const originalHeight = 3840;
+    const originalCoords = [100, 1300, 700, 1400];
+
+    function updateCoords() {
+      const img = document.querySelector('img[usemap]');
+      if (!img.naturalWidth) return;
+
+      const scaleX = img.clientWidth / originalWidth;
+      const scaleY = img.clientHeight / originalHeight;
+
+      const newCoords = [
+        Math.round(originalCoords[0] * scaleX),
+        Math.round(originalCoords[1] * scaleY),
+        Math.round(originalCoords[2] * scaleX),
+        Math.round(originalCoords[3] * scaleY)
+      ].join(',');
+
+      const area = document.querySelector('area');
+      area.coords = newCoords;
+    }
+
     window.addEventListener('load', function () {
-      // Crear el recuadro verde
+      // Esperar a que la imagen cargue
+      const img = document.querySelector('img[usemap]');
+      img.onload = updateCoords;
+
+      // Actualizar en resize
+      window.addEventListener('resize', updateCoords);
+
+      // Efecto hover
       const recuadro = document.createElement('div');
       recuadro.className = 'efecto-hover';
       document.querySelector('.contenedor').appendChild(recuadro);
 
       const areas = document.querySelectorAll('area');
-
       areas.forEach(area => {
         area.addEventListener('mouseenter', function() {
-          const coords = this.getAttribute('coords').split(',');
+          const coords = this.coords.split(',');
           const x1 = parseInt(coords[0], 10);
           const y1 = parseInt(coords[1], 10);
           const x2 = parseInt(coords[2], 10);
@@ -83,7 +109,6 @@
           recuadro.style.top = y1 + 'px';
           recuadro.style.width = (x2 - x1) + 'px';
           recuadro.style.height = (y2 - y1) + 'px';
-          
           recuadro.classList.add('activo');
         });
 
@@ -91,6 +116,9 @@
           recuadro.classList.remove('activo');
         });
       });
+
+      // Inicializar coordenadas
+      setTimeout(updateCoords, 100);
     });
   </script>
 </body>
