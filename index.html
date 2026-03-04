@@ -56,69 +56,76 @@
   <div class="contenedor">
     <img src="https://i.ibb.co/BVmzFtz5/IMG-5262.png"
          usemap="#mapa-facturacion"
+         id="landing-img"
          alt="Landing de facturación">
   </div>
 
   <script>
-    // Coordenadas originales de la imagen completa (2160x3840)
-    const originalWidth = 2160;
-    const originalHeight = 3840;
-    const originalCoords = [100, 1300, 700, 1400];
+    const IMG_ORIGINAL_WIDTH = 2160;
+    const IMG_ORIGINAL_HEIGHT = 3840;
+    const AREA_ORIGINAL_COORDS = [100, 1300, 700, 1400];
 
-    function updateCoords() {
-      const img = document.querySelector('img[usemap]');
+    function updateMapCoords() {
+      const img = document.getElementById('landing-img');
       if (!img.naturalWidth) return;
 
-      const scaleX = img.clientWidth / originalWidth;
-      const scaleY = img.clientHeight / originalHeight;
+      const scaleX = img.clientWidth / IMG_ORIGINAL_WIDTH;
+      const scaleY = img.clientHeight / IMG_ORIGINAL_HEIGHT;
 
-      const newCoords = [
-        Math.round(originalCoords[0] * scaleX),
-        Math.round(originalCoords[1] * scaleY),
-        Math.round(originalCoords[2] * scaleX),
-        Math.round(originalCoords[3] * scaleY)
+      const scaledCoords = [
+        Math.floor(AREA_ORIGINAL_COORDS[0] * scaleX),
+        Math.floor(AREA_ORIGINAL_COORDS[1] * scaleY),
+        Math.floor(AREA_ORIGINAL_COORDS[2] * scaleX),
+        Math.floor(AREA_ORIGINAL_COORDS[3] * scaleY)
       ].join(',');
 
       const area = document.querySelector('area');
-      area.coords = newCoords;
+      area.coords = scaledCoords;
     }
 
     window.addEventListener('load', function () {
-      // Esperar a que la imagen cargue
-      const img = document.querySelector('img[usemap]');
-      img.onload = updateCoords;
+      // Esperar imagen + actualizar coordenadas
+      const img = document.getElementById('landing-img');
+      if (img.complete) {
+        updateMapCoords();
+      } else {
+        img.onload = updateMapCoords;
+      }
 
-      // Actualizar en resize
-      window.addEventListener('resize', updateCoords);
+      // Re-actualizar en resize
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(updateMapCoords, 250);
+      });
 
       // Efecto hover
       const recuadro = document.createElement('div');
       recuadro.className = 'efecto-hover';
       document.querySelector('.contenedor').appendChild(recuadro);
 
+      function updateHover() {
+        const area = document.querySelector('area');
+        const coords = area.coords.split(',');
+        const x1 = parseInt(coords[0], 10);
+        const y1 = parseInt(coords[1], 10);
+        const x2 = parseInt(coords[2], 10);
+        const y2 = parseInt(coords[3], 10);
+
+        recuadro.style.left = x1 + 'px';
+        recuadro.style.top = y1 + 'px';
+        recuadro.style.width = (x2 - x1) + 'px';
+        recuadro.style.height = (y2 - y1) + 'px';
+      }
+
       const areas = document.querySelectorAll('area');
       areas.forEach(area => {
-        area.addEventListener('mouseenter', function() {
-          const coords = this.coords.split(',');
-          const x1 = parseInt(coords[0], 10);
-          const y1 = parseInt(coords[1], 10);
-          const x2 = parseInt(coords[2], 10);
-          const y2 = parseInt(coords[3], 10);
-
-          recuadro.style.left = x1 + 'px';
-          recuadro.style.top = y1 + 'px';
-          recuadro.style.width = (x2 - x1) + 'px';
-          recuadro.style.height = (y2 - y1) + 'px';
-          recuadro.classList.add('activo');
-        });
-
+        area.addEventListener('mouseenter', updateHover);
         area.addEventListener('mouseleave', function() {
           recuadro.classList.remove('activo');
         });
+        area.addEventListener('touchstart', updateHover); // Para móvil
       });
-
-      // Inicializar coordenadas
-      setTimeout(updateCoords, 100);
     });
   </script>
 </body>
