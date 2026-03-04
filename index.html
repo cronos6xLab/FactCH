@@ -27,38 +27,30 @@
       border: 0;
     }
 
-    /* Efecto visual (cuadro verde al pasar el ratón) */
-    .efecto-hover {
+    /* Efecto de debug: rectángulo rojo encima del área */
+    .debug-overlay {
       position: absolute;
-      border: 2px solid #4CAF50;
-      background-color: rgba(76, 175, 80, 0.3);
-      border-radius: 8px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s ease-in-out;
-      z-index: 10;
-    }
-
-    .efecto-hover.activo {
-      opacity: 1;
+      background-color: rgba(255, 0, 0, 0.3);   /* rojo semitransparente */
+      border: 2px solid red;
+      pointer-events: none; /* para que el clic siga pasando por el área del mapa */
+      z-index: 20;
     }
   </style>
 </head>
 <body>
 
-  <!-- Mapa ajustado para tu imagen remota (ajusta coords según lo que te diga image-map.net sobre IMG_5262.png) -->
-  <map name="mapa-facturacion">
+  <!-- Mapa generado por image-map.net -->
+  <map name="image-map">
     <area shape="rect"
-          coords="127,1314,724,1426"  <!-- cambia estas coords si hiciste el mapa sobre IMG_5260.jpeg -->
+          coords="127,1314,724,1426"
           href="https://factura.foodbot.ai/fa.html"
           alt="Ir al portal de facturación"
           title="Ir al portal de facturación">
   </map>
 
   <div class="contenedor">
-    <!-- Tu imagen visible en el navegador -->
-    <img src="https://i.ibb.co/BVmzFtz5/IMG-5262.png"
-         usemap="#mapa-facturacion"
+    <img src="IMG_5260.jpeg"
+         usemap="#image-map"
          alt="Landing de facturación">
   </div>
 
@@ -66,35 +58,30 @@
 
   <script>
     window.addEventListener('load', function () {
+      // 1. Inicializar mapa responsivo
       if (typeof imageMapResize === 'function') {
         imageMapResize();
       }
 
-      const recuadro = document.createElement('div');
-      recuadro.className = 'efecto-hover';
-      document.querySelector('.contenedor').appendChild(recuadro);
-
+      // 2. Añadir un overlay de color encima del área para ver dónde está
       const areas = document.querySelectorAll('area');
+      const contenedor = document.querySelector('.contenedor');
 
       areas.forEach(area => {
-        area.addEventListener('mouseenter', function() {
-          const coords = this.getAttribute('coords').split(',');
-          const x1 = parseInt(coords[0], 10);
-          const y1 = parseInt(coords[1], 10);
-          const x2 = parseInt(coords[2], 10);
-          const y2 = parseInt(coords[3], 10);
+        const coords = area.getAttribute('coords').split(',');
+        const x1 = parseInt(coords[0], 10);
+        const y1 = parseInt(coords[1], 10);
+        const x2 = parseInt(coords[2], 10);
+        const y2 = parseInt(coords[3], 10);
 
-          recuadro.style.left = x1 + 'px';
-          recuadro.style.top = y1 + 'px';
-          recuadro.style.width = (x2 - x1) + 'px';
-          recuadro.style.height = (y2 - y1) + 'px';
-          
-          recuadro.classList.add('activo');
-        });
+        const overlay = document.createElement('div');
+        overlay.className = 'debug-overlay';
+        overlay.style.left  = x1 + 'px';
+        overlay.style.top   = y1 + 'px';
+        overlay.style.width = (x2 - x1) + 'px';
+        overlay.style.height = (y2 - y1) + 'px';
 
-        area.addEventListener('mouseleave', function() {
-          recuadro.classList.remove('activo');
-        });
+        contenedor.appendChild(overlay);
       });
     });
   </script>
